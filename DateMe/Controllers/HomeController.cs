@@ -12,19 +12,34 @@ namespace DateMe.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private DateApplicationContext blahContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        // Constructor 
+        public HomeController(ILogger<HomeController> logger, DateApplicationContext someName)
         {
             _logger = logger;
+            blahContext = someName;
         }
 
         public IActionResult Index()
         {
             return View();
         }
+
+        [HttpGet]
         public IActionResult DatingApplication()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult DatingApplication (ApplicationResponse ar)
+        {
+            //Connet to database also
+            blahContext.Add(ar);
+            blahContext.SaveChanges();
+
+            return View("Confirmation", ar);
         }
 
         public IActionResult Privacy()

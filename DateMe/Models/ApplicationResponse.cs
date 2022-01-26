@@ -1,8 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace DateMe.Models
 {
     public class ApplicationResponse
     {
+        [System.ComponentModel.DataAnnotations.Key]
+        [Required]
+        public int ApplicationID { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
